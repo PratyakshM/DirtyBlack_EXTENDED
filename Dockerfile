@@ -34,7 +34,6 @@ RUN apk add --no-cache=true --update \
     musl \
     neofetch \
     openssl-dev \
-    openssh \
     postgresql \
     postgresql-client \
     postgresql-dev \
@@ -56,25 +55,9 @@ RUN apk add --no-cache=true --update \
     zip \
     megatools \
     nodejs \
-    freetype-dev \
-    unace \
-    unrar \
-    zip \
-    unzip \
-    p7zip \
-    sharutils \
-    uudeview \
-    arj \
-    cabextract \
-    file-roller \
-    dtc \
-    xz \
-    python-pip \
-    brotli \
-    lz4 \
-    gawk \
-    libmpack \
-    openjdk11-jre-11.0.7_p10-r1
+    freetype-dev
+
+
 RUN python3 -m ensurepip \
     && pip3 install --upgrade pip setuptools \
     && pip3 install wheel \
@@ -82,13 +65,13 @@ RUN python3 -m ensurepip \
     if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
     rm -r /root/.cache
-RUN pip install backports.lzma protobuf pycrypto
+
 #
 # Clone repo and prepare working directory
 #
-RUN git clone -b sql-extended https://github.com/ElytrA8/DirtyBlack_EXTENDED /root/dirtyblack
-RUN mkdir /root/dirtyblack/bin/
-WORKDIR /root/dirtyblack/
+RUN git clone -b sql-extended https://github.com/ElytrA8/DirtyBlack_EXTENDED /root/DirtyBlack_EXTENDED
+RUN mkdir /root/DirtyBlack_EXTENDED/bin/
+WORKDIR /root/DirtyBlack_EXTENDED/
 
 #
 # Copies session and config (if it exists)
